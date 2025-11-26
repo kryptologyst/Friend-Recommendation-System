@@ -1,0 +1,57 @@
+# Default configuration for friend recommendation system
+
+# Data settings
+data:
+  n_users: 1000
+  n_items: 500
+  train_ratio: 0.7
+  val_ratio: 0.15
+  test_ratio: 0.15
+
+# Model settings
+models:
+  content_based:
+    use_sbert: false
+    max_features: 1000
+  
+  user_based_cf:
+    n_neighbors: 50
+  
+  item_based_cf:
+    n_neighbors: 50
+  
+  matrix_factorization:
+    n_components: 50
+  
+  als:
+    factors: 50
+    iterations: 15
+  
+  graph_based:
+    algorithm: "pagerank"  # pagerank, betweenness, closeness
+  
+  community_based:
+    algorithm: "louvain"  # louvain, greedy_modularity
+  
+  random_walk:
+    walk_length: 10
+    num_walks: 100
+  
+  hybrid:
+    weights:
+      content: 0.3
+      collaborative: 0.4
+      graph: 0.3
+
+# Evaluation settings
+evaluation:
+  k_values: [5, 10, 20]
+  primary_metric: "ndcg@10"
+  n_recommendations: 10
+
+# Random seed
+seed: 42
+
+# Logging
+logging:
+  level: "INFO"
